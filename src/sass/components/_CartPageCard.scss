@@ -7,17 +7,34 @@
   box-shadow: 0rem 0rem 1rem rgba($color-grey-dark-3, $alpha: 0.3);
   font-size: 1.5rem;
 
+  @media only screen and (max-width: 414px) {
+    & {
+      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 2rem;
   }
 
   &__title {
-    text-transform: uppercase;
+    text-transform: none;
     font-size: 2rem;
+    width: 40%;
+    font-weight: 700;
+
+    @media only screen and (max-width: 414px) {
+      & {
+        width: auto;
+      }
+    }
   }
 
   &__qty {
     font-size: 1.5rem;
+    font-weight: 700;
   }
 
   &__unit-price {

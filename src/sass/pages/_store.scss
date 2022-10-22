@@ -3,20 +3,55 @@
   background-color: $color-white-2;
   display: flex;
 
+  @media only screen and (max-width: 414px) {
+    & {
+      flex-wrap: wrap;
+      padding: 2rem;
+    }
+  }
+
   &__grid {
-    width: 50%;
+    width: 65%;
     display: grid;
-    row-gap: 1rem;
-    grid-template-columns: repeat(2, 50%);
+    gap: 4rem;
+    grid-template-columns: repeat(4, 20%);
+    justify-content: center;
+
+    @media only screen and (max-width: 414px) {
+      & {
+        width: 100%;
+        grid-template-columns: repeat(1, 100%);
+      }
+    }
   }
 
   &__cart {
-    width: 50%;
+    width: 35%;
+
+    @media only screen and (max-width: 414px) {
+      & {
+        margin-top: 5rem;
+        width: 100%;
+      }
+    }
+  }
+
+  &__title {
+    color: $color-red-brand;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
   }
 
   &__total-price {
     display: flex;
     justify-content: space-between;
+
+    @media only screen and (max-width: 414px) {
+      & {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+    }
   }
 }
 

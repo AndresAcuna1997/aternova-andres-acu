@@ -19,7 +19,7 @@ export const StorePageCard = ({
       return setInput(stock);
     }
 
-    setInput(Number(e.target.value));
+    setInput(Math.floor(Number(e.target.value)));
   };
 
   return (
@@ -38,7 +38,8 @@ export const StorePageCard = ({
           className="quantity"
           value={input}
           onChange={(e) => handleInput(e)}
-          min="0"
+          min="1"
+          step="1"
         />
         <button
           onClick={() =>

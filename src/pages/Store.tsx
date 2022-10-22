@@ -1,12 +1,15 @@
-import { Header } from "../components/Header";
-import { StorePageCard } from "../components/StorePageCard";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
-import axios from "axios";
-import CartProduct from "../interfaces/CartProduct.interface";
-import Product from "../interfaces/Product.interface";
+import { StorePageCard } from "../components/StorePageCard";
+import { Header } from "../components/Header";
 import { CartPageCard } from "../components/CartPageCard";
 import { ErrorMessage } from "../components/ErrorMessage";
+
+import CartProduct from "../interfaces/CartProduct.interface";
+import Product from "../interfaces/Product.interface";
+import AlarmMessage from "../interfaces/AlarmMessage.interface";
+import { info } from "console";
 
 const alarmInitialState = {
   message: "",
@@ -21,7 +24,8 @@ export const Store = () => {
 
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const [informationData, setInformationData] = useState(alarmInitialState);
+  const [informationData, setInformationData] =
+    useState<AlarmMessage>(alarmInitialState);
 
   const fetchData = async () => {
     const { data } = await axios.get("./products.json");
@@ -60,25 +64,22 @@ export const Store = () => {
       existProductInCart.quantity =
         existProductInCart.quantity + product.quantity;
 
-      let newCart: CartProduct[];
-
-      newCart = [...cart];
-
-      newCart.forEach((cartProduct) => {
-        if (cartProduct.name === product.name) {
-          cartProduct = existProductInCart;
-        }
-      });
-
-      setCart(newCart);
+      setCart((prev) =>
+        prev.map((cartProduct) => {
+          if (cartProduct.name === product.name) {
+            cartProduct.quantity = existProductInCart.quantity;
+          }
+          return cartProduct;
+        })
+      );
     } else {
       setCart((prev) => [...prev, product]);
-      setInformationData({
-        message: "Product Added",
-        error: false,
-        show: true,
-      });
     }
+    setInformationData({
+      message: "Product Added",
+      error: false,
+      show: true,
+    });
   };
 
   const calculateTotalPrice = (): void => {
@@ -89,6 +90,18 @@ export const Store = () => {
     });
 
     setTotalPrice(totalPrice);
+  };
+
+  const createJsonFile = () => {
+    return {
+      order: {
+        total_price: totalPrice,
+        products: cart.map(({ stock, ...info }) => ({
+          ...info,
+          total_price_perItem: info.quantity * info.unit_price,
+        })),
+      },
+    };
   };
 
   useEffect(() => {
@@ -123,6 +136,7 @@ export const Store = () => {
         </div>
 
         <div className="store-content__cart">
+          <h2 className="store-content__title">Shopping Cart</h2>
           {cart?.map(({ name, unit_price, stock, quantity }, i) => (
             <CartPageCard
               key={i}
@@ -135,7 +149,16 @@ export const Store = () => {
 
           {cart?.length > 0 ? (
             <div className="store-content__total-price">
-              <button className="btn">Create an Order</button>
+              <a
+                type="button"
+                className="btn"
+                href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                  JSON.stringify(createJsonFile())
+                )}`}
+                download="OrderAlterNova.json"
+              >
+                {`Create an Order`}
+              </a>
               <h2>Total Price: $ {totalPrice}</h2>
             </div>
           ) : (
