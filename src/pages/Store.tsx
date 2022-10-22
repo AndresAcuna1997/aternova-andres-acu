@@ -9,7 +9,6 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import CartProduct from "../interfaces/CartProduct.interface";
 import Product from "../interfaces/Product.interface";
 import AlarmMessage from "../interfaces/AlarmMessage.interface";
-import { info } from "console";
 
 const alarmInitialState = {
   message: "",
@@ -110,6 +109,7 @@ export const Store = () => {
 
   useEffect(() => {
     calculateTotalPrice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   useEffect(() => {

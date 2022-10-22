@@ -27,7 +27,7 @@ export const StorePageCard = ({
       <img
         className="store-card__image"
         src="./logo192.png"
-        alt="product-image"
+        alt="product-filler"
       />
       <h3 className="store-card__title">{name}</h3>
       <h2 className="store-card__price">$ {unit_price} p/u</h2>
