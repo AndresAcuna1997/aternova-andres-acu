@@ -1,0 +1,25 @@
+.store-content {
+  padding: 5rem 2rem;
+  background-color: $color-white-2;
+  display: flex;
+
+  &__grid {
+    width: 50%;
+    display: grid;
+    row-gap: 1rem;
+    grid-template-columns: repeat(2, 50%);
+  }
+
+  &__cart {
+    width: 50%;
+  }
+
+  &__total-price {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+main {
+  position: relative;
+}

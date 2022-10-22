@@ -1,0 +1,17 @@
+.error-message {
+  padding: 3rem;
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  border-radius: 20px;
+  font-weight: 700;
+  color: $color-white;
+
+  &.error {
+    background-color: red;
+  }
+
+  &.sucess {
+    background-color: green;
+  }
+}

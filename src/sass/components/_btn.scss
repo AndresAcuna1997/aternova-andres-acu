@@ -1,0 +1,15 @@
+.btn {
+  border: none;
+  background-color: $color-red-brand;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  color: $color-white;
+  box-shadow: 0rem 0.5rem 1rem rgba($color-grey-dark-3, $alpha: 0.6);
+  transition: all 0.2s;
+
+  &:active {
+    box-shadow: 0rem 0.1rem 1rem rgba($color-grey-dark-3, $alpha: 0.6);
+    transform: translateY(5px);
+  }
+}

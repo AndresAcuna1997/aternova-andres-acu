@@ -1,0 +1,30 @@
+.cart-card {
+  display: flex;
+  justify-content: space-around;
+  gap: 7rem;
+  padding: 2rem;
+  background-color: $color-white;
+  box-shadow: 0rem 0rem 1rem rgba($color-grey-dark-3, $alpha: 0.3);
+  font-size: 1.5rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 2rem;
+  }
+
+  &__qty {
+    font-size: 1.5rem;
+  }
+
+  &__unit-price {
+    font-weight: 700;
+  }
+
+  &__total-price {
+    font-weight: 900;
+  }
+}
